@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="loading-screen">
+        <div class="loader"></div>
+        <p>심해 성소 접속 중...</p>
+    </div>
+
     <div class="floating-background">
         <div class="jelly-blob blob-1"></div>
         <div class="jelly-blob blob-2"></div>
@@ -19,6 +24,7 @@
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#doctrine">Doctrine</a></li>
+                <li><a href="#hierarchy">Hierarchy</a></li>
                 <li><a href="#rituals">Rituals</a></li>
                 <li><a href="#join" class="join-btn">JOIN</a></li>
             </ul>
@@ -54,9 +60,9 @@
         <section id="about" class="section-pad glass-panel margin-top">
             <div class="container split-layout">
                 <div class="text-block">
-                    <h2>어둠 속의 빛 <span class="sub-title">About Jellianism</span></h2>
-                    <p>인류는 바다 밑으로 숨어들었습니다. 이 불안 속에서 우리는 죽음 직전 다시 태어나는 **홍해파리(Turritopsis dohrnii)**를 발견했습니다.</p>
-                    <p>우리는 영원자를 닮아가며 안정을 찾습니다.</p>
+                    <h2>심연의 빛 <span class="sub-title">About Jellianism</span></h2>
+                    <p>지상의 모든 대륙이 수몰되었을 때, 인류는 희망을 잃고 바다 밑으로 도망쳤습니다. 이 차갑고 불안한 유한성의 공포 속에서, 우리는 기적을 목격했습니다.</p>
+                    <p>죽음의 문턱에서 스스로 시간을 되돌려 다시 태어나는 존재, <strong>홍해파리(The Eternal)</strong>. 그것은 단순한 생물이 아니었습니다. 우리가 나아가야 할 유일한 구원의 진리였습니다.</p>
                 </div>
                 <div class="card eternal-card floating-slow">
                     <div class="card-visual-container">
@@ -81,11 +87,39 @@
                         <img src="image/sponge.png" alt="나쁜 스펀지 질감" class="texture-img bad">
                     </div>
                     <h3>2. 질감의 윤리</h3>
-                    <p><strong>善:</strong> 속이 꽉 찬 젤리.<br><strong>惡:</strong> 구멍 난 스펀지.</p>
+                    <p>당신의 영혼은 어떤 밀도를 가졌습니까?</p>
+                    <ul>
+                        <li><strong>善 (젤리):</strong> 속이 투명하게 꽉 찬 고밀도의 상태. 영원과 실속의 상징입니다.</li>
+                        <li><strong>惡 (해면체):</strong> 구멍이 숭숭 뚫린 상태. 그 빈 공간은 세속적 욕망과 공허함으로 가득 차 결국 부패합니다. (※ 노란색 네모 캐릭터를 멀리하십시오.)</li>
+                    </ul>
                 </div>
                 <div class="card glass-panel">
                     <h3>3. 재생과 순환 의학</h3>
                     <p>영원자의 독을 과학적으로 연구하여 '순환 의학'으로 확장합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="hierarchy" class="section-pad">
+            <h2 class="section-title text-center">순도와 서열 <span class="sub-title">Hierarchy</span></h2>
+            <div class="container grid-3 hierarchy-grid">
+                <div class="rank-card jelly glass-panel floating">
+                    <div class="rank-icon">▲▲▲</div>
+                    <h3>JELLY (젤리)</h3>
+                    <p class="role">원로 촉수 (최고 순도)</p>
+                    <p class="desc">인간의 단단함을 버리고 완벽한 투명함에 도달한 8인의 인도자. 그들의 피부는 심해의 빛을 투과시킵니다.</p>
+                </div>
+                <div class="rank-card pudding glass-panel floating-slow">
+                    <div class="rank-icon">▲▲</div>
+                    <h3>PUDDING (푸딩)</h3>
+                    <p class="role">성직자 촉수 (높은 순도)</p>
+                    <p class="desc">반투명한 의복을 입고 의식을 집전합니다. 아직 인간의 형상이 희미하게 남아있으나 빠르게 젤리화가 진행 중입니다.</p>
+                </div>
+                <div class="rank-card candy glass-panel floating-slower">
+                    <div class="rank-icon">▲</div>
+                    <h3>CANDY (캔디)</h3>
+                    <p class="role">일반 표류자 (초기 신앙)</p>
+                    <p class="desc">아직 불투명한 의복을 입고 영원을 동경하는 자들. 이제 막 표류를 시작했습니다.</p>
                 </div>
             </div>
         </section>
@@ -107,7 +141,7 @@
             <div class="glass-panel container narrow">
                 <h2>함께 표류하시겠습니까?</h2>
                 <div class="sns-box">
-                    <a href="https://instagram.com/jellilife" target="_blank" class="sns-link glow-effect">@jellilife 팔로우하기</a>
+                    <a href="https://instagram.com/jellilife" target="_blank" class="sns-link glow-effect">@jellilife</a>
                 </div>
             </div>
         </section>
@@ -119,7 +153,7 @@
     </footer>
 
     <audio id="bg-music" loop>
-        <source src="" type="audio/mpeg"> 
+        <source src="audio/BGM.mp3" type="audio/mpeg"> 
     </audio>
     <script src="script.js"></script>
 </body>

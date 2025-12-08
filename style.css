@@ -1,3 +1,27 @@
+/* 폰트 파일 불러오기 */
+@font-face {
+    font-family: 'Grotesk';
+    src: url('font/Grotesk-04Gras.woff2') format('woff2'),
+         url('font/Grotesk-04Gras.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Grotesk';
+    /* 실제 파일 경로와 이름을 정확히 적어주세요. */
+    src: url('font/Grotesk-02Mince.woff') format('woff'),
+         url('font/Grotesk-01Extrafin.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* 2. 변수에 Grotesk 폰트 적용하기 */
+:root {
+    --font-heading: 'Grotesk', sans-serif;
+    --font-body: 'Grotesk', sans-serif;
+}    
+
 /* --- 1. 테마 변수 정의 (핵심!) --- */
 
 /* 기본: 라이트 모드 (밝고 깨끗한 연구소/해수면 느낌) */
@@ -27,6 +51,21 @@
     --image-brightness: 1.2; /* 다크 모드에서 이미지를 약간 더 밝게 */
 }
 
+/* 로딩 스크린 스타일 */
+#loading-screen {
+    position: fixed; width: 100%; height: 100%;
+    background: var(--bg-primary); z-index: 9999;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transition: opacity 0.5s ease;
+}
+.loader {
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    border-top: 5px solid var(--accent-color); /* 붉은색 또는 청록색 */
+    border-radius: 50%; width: 50px; height: 50px;
+    animation: spin 1s linear infinite; margin-bottom: 1rem;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
 /* --- 2. 기본 스타일 --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -45,7 +84,7 @@ h1, h2, h3, h4, .logo { font-family: 'Orbitron', sans-serif; }
 .accent-text { color: var(--accent-color); text-shadow: var(--accent-glow); transition: 0.5s; }
 .accent-dot { color: var(--accent-color); }
 .sub-title { display: block; font-size: 0.9rem; color: var(--text-secondary); letter-spacing: 2px; margin-top: 5px; }
-.section-pad { padding: 5rem 0; }
+.section-pad { padding: 8rem 0; }
 .margin-top { margin-top: 4rem; }
 
 /* --- 3. 글래스모피즘 & 카드 --- */

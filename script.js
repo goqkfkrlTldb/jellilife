@@ -1,3 +1,12 @@
+// 페이지 로드 완료 시 로딩 화면 제거
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loading-screen');
+    loader.style.opacity = '0';
+    setTimeout(() => {
+        loader.style.display = 'none';
+    }, 500); // 0.5초 뒤에 완전히 사라짐
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- 1. 라이트/다크 모드 토글 기능 ---
@@ -37,18 +46,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isPlaying) {
             bgMusic.play().then(() => {
                 isPlaying = true;
-                soundBtn.textContent = "🔊 Sound Off";
+                soundBtn.textContent = "🔊 Sound On";
                 // 사운드가 시작되면 분위기를 위해 다크모드로 자동 전환 (선택사항)
-                if(toggleSwitch.checked === false) {
+                /*if(toggleSwitch.checked === false) {
                      toggleSwitch.click();
-                }
+                }*/
             }).catch(error => {
                 console.log("사운드 재생 실패 (브라우저 정책):", error);
             });
         } else {
             bgMusic.pause();
             isPlaying = false;
-            soundBtn.textContent = "🔈 Sound On";
+            soundBtn.textContent = "🔈 Sound Off";
         }
     });
 
