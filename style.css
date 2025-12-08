@@ -1,0 +1,175 @@
+/* --- 1. 테마 변수 정의 (핵심!) --- */
+
+/* 기본: 라이트 모드 (밝고 깨끗한 연구소/해수면 느낌) */
+:root {
+    --bg-primary: #f0f5f9; /* 아주 밝은 하늘색/회색 */
+    --bg-secondary: #dde7ee;
+    --text-primary: #1a2a3a; /* 진한 남색 텍스트 */
+    --text-secondary: #546e7a;
+    --accent-color: #00a8cc; /* 라이트 모드 강조색 (청록색) */
+    --accent-glow: none; /* 라이트 모드엔 발광 없음 */
+    --glass-bg: rgba(255, 255, 255, 0.7); /* 밝은 유리 */
+    --glass-border: rgba(255, 255, 255, 0.8);
+    --image-brightness: 1.0; /* 이미지 기본 밝기 */
+}
+
+/* 다크 모드 (심해, 발광하는 해파리 콘셉트) */
+[data-theme="dark"] {
+    --bg-primary: #020c1b; /* 깊은 심해 */
+    --bg-secondary: #0a192f;
+    --text-primary: #e6f1ff; /* 밝은 형광 텍스트 */
+    --text-secondary: #8892b0;
+    --accent-color: #ff3c3c; /* 홍해파리 심장 (형광 레드) */
+    /* 핵심: 다크 모드 발광 효과 */
+    --accent-glow: 0 0 20px rgba(255, 60, 60, 0.6), 0 0 40px rgba(255, 60, 60, 0.3);
+    --glass-bg: rgba(20, 30, 50, 0.5); /* 어두운 유리 */
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --image-brightness: 1.2; /* 다크 모드에서 이미지를 약간 더 밝게 */
+}
+
+/* --- 2. 기본 스타일 --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
+    color: var(--text-primary);
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background 0.5s ease, color 0.5s ease; /* 테마 전환 부드럽게 */
+}
+h1, h2, h3, h4, .logo { font-family: 'Orbitron', sans-serif; }
+.container { width: 90%; max-width: 1100px; margin: 0 auto; }
+.narrow { max-width: 600px; }
+.text-center { text-align: center; }
+.accent-text { color: var(--accent-color); text-shadow: var(--accent-glow); transition: 0.5s; }
+.accent-dot { color: var(--accent-color); }
+.sub-title { display: block; font-size: 0.9rem; color: var(--text-secondary); letter-spacing: 2px; margin-top: 5px; }
+.section-pad { padding: 5rem 0; }
+.margin-top { margin-top: 4rem; }
+
+/* --- 3. 글래스모피즘 & 카드 --- */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: 0.5s ease;
+}
+.card { padding: 2rem; transition: transform 0.3s, border-color 0.3s; }
+.card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+
+/* --- 4. ★★ 이미지 및 발광 효과 (핵심) ★★ --- */
+img { max-width: 100%; height: auto; display: block; }
+
+/* 다크 모드에서 빛나야 할 이미지들을 위한 클래스 */
+.bioluminescent-img {
+    border-radius: 20px;
+    transition: all 0.8s ease; /* 불이 천천히 켜지는 듯한 느낌 */
+}
+
+/* [data-theme="dark"] 상태일 때만 적용되는 스타일 */
+[data-theme="dark"] .bioluminescent-img {
+    /* 이미지를 약간 밝게 하고 대비를 높임 */
+    filter: brightness(var(--image-brightness)) contrast(1.1);
+    /* 붉은색으로 빛나는 그림자 효과 (전구 켜진 느낌) */
+    box-shadow: var(--accent-glow);
+}
+
+/* --- Hero Section (중앙 정렬 핵심) --- */
+#hero {
+    min-height: 90vh;
+    /* Flexbox를 이용한 수직/수평 중앙 정렬 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 6rem 2rem;
+}
+
+#hero h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    margin: 1rem 0;
+    line-height: 1.2;
+}
+
+#hero h4 {
+    color: var(--accent-color);
+    letter-spacing: 3px;
+}
+
+#hero p {
+    max-width: 600px;
+    margin: 0 auto 2rem; /* 텍스트 블록 중앙 정렬 */
+    color: var(--text-secondary);
+}
+
+.cta-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem; /* 이미지와 간격 추가 */
+}
+
+.hero-image-container {
+    max-width: 600px;
+    margin: 0 auto; /* 상하 마진 제거, 좌우 중앙 정렬 */
+    text-align: center;
+}
+.card-visual-container { margin-bottom: 1.5rem; }
+.texture-comparison { display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem;}
+.texture-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid transparent; }
+.texture-img.good { border-color: var(--accent-color); }
+.texture-img.bad { border-color: #555; opacity: 0.6; }
+
+
+/* --- 5. 내비게이션 & 토글 스위치 --- */
+header { position: fixed; width: 100%; top: 0; z-index: 100; padding: 1rem 2%; }
+.header-nav { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 2rem; }
+.logo { font-weight: 700; font-size: 1.4rem; letter-spacing: 2px; }
+.nav-links { display: flex; list-style: none; gap: 1.5rem; align-items: center; }
+.nav-links a { text-decoration: none; color: var(--text-primary); font-weight: 700; font-size: 0.9rem; transition: color 0.3s; }
+.nav-links a:hover { color: var(--accent-color); }
+.join-btn { color: var(--accent-color) !important; }
+
+/* 토글 스위치 디자인 */
+.theme-switch-wrapper { display: flex; align-items: center; margin-left: 2rem;}
+.theme-switch { display: inline-block; height: 26px; position: relative; width: 50px; }
+.theme-switch input { display:none; }
+.slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; display: flex; justify-content: space-between; padding: 2px 6px; align-items: center; font-size: 14px;}
+.slider:before { background-color: #fff; bottom: 4px; content: ""; height: 18px; left: 4px; position: absolute; transition: .4s; width: 18px; border-radius: 50%; z-index: 2;}
+input:checked + .slider { background-color: var(--accent-color); }
+input:checked + .slider:before { transform: translateX(24px); }
+.icon-sun { color: #f39c12; } .icon-moon { color: #f1c40f; }
+
+/* --- 6. 기타 요소 (버튼, 타이머, 배경) --- */
+.btn-primary, .btn-secondary { padding: 0.8rem 1.5rem; border-radius: 30px; text-decoration: none; font-weight: 700; transition: all 0.3s; display: inline-block; cursor: pointer; border: 2px solid var(--accent-color); background: transparent; color: var(--text-primary); }
+.btn-primary { background: var(--accent-color); color: #fff; border: none; }
+.btn-primary:hover { box-shadow: var(--accent-glow); }
+[data-theme="dark"] .glow-effect:hover { box-shadow: var(--accent-glow); }
+
+.floating-background { position: fixed; top:0; left:0; width:100%; height:100%; z-index: -1; pointer-events: none; opacity: 0; transition: opacity 0.5s;}
+[data-theme="dark"] .floating-background { opacity: 1; }
+.jelly-blob { position: absolute; background: radial-gradient(circle, rgba(255, 60, 60, 0.15) 0%, transparent 70%); border-radius: 50%; filter: blur(40px); animation: float 20s infinite linear; }
+.blob-1 { width: 400px; height: 400px; top: 20%; left: 10%; }
+.blob-2 { width: 300px; height: 300px; bottom: 10%; right: 10%; animation-direction: reverse; }
+
+/* 애니메이션 */
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+.floating { animation: float 6s ease-in-out infinite; }
+.floating-slow { animation: float 8s ease-in-out infinite; }
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    .nav-links { display: none; } /* 모바일 메뉴 생략 */
+    .split-layout { flex-direction: column; }
+}
+footer { padding: 2rem 0; text-align: center; font-size: 0.8rem; opacity: 0.7; margin-top: 3rem;}
