@@ -35,6 +35,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     toggleSwitch.addEventListener('change', switchTheme);
 
+    // script.js 안에 추가
+
+    // --- 커스텀 커서 움직임 구현 ---
+    const cursor = document.getElementById('cursor');
+
+    if (cursor) {
+        // 1. 마우스 움직임 따라다니기
+        document.addEventListener('mousemove', (e) => {
+            // 커서의 위치를 마우스 좌표로 업데이트
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // 2. 인터랙티브 요소(버튼, 링크) 호버 효과
+        const interactives = document.querySelectorAll('a, button, input, .theme-switch, .interactive');
+        
+        interactives.forEach(el => {
+            // 마우스 올렸을 때: 커서가 1.5배 커짐
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                // (옵션) 호버 시 약간 투명해지거나 색을 바꿀 수도 있음
+                // cursor.style.filter = 'hue-rotate(90deg)'; 
+            });
+            
+            // 마우스 뗐을 때: 원래 크기로 복귀
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.filter = 'none';
+            });
+        });
+    }
 
     // --- 2. 사운드 재생 컨트롤 ---
     const soundBtn = document.getElementById('sound-toggle-btn');

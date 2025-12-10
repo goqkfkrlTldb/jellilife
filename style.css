@@ -1,26 +1,35 @@
 /* 폰트 파일 불러오기 */
 @font-face {
     font-family: 'Grotesk';
-    src: url('font/Grotesk-04Gras.woff2') format('woff2'),
-         url('font/Grotesk-04Gras.woff') format('woff');
+    src: url('fonts/Grotesk-04Gras.woff2'), format('woff2'),
+         url('fonts/Grotesk-03Regular.woff'), format('woff');
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Grotesk';
-    /* 실제 파일 경로와 이름을 정확히 적어주세요. */
-    src: url('font/Grotesk-02Mince.woff') format('woff'),
-         url('font/Grotesk-01Extrafin.woff') format('woff');
+    src: url('fonts/Grotesk-02Mince.woff'), format('woff'),
+         url('fonts/Grotesk-01Extrafin.woff'), format('woff');
     font-weight: 400;
     font-style: normal;
 }
 
-/* 2. 변수에 Grotesk 폰트 적용하기 */
 :root {
     --font-heading: 'Grotesk', sans-serif;
     --font-body: 'Grotesk', sans-serif;
-}    
+}  
+
+body,
+a, 
+button, 
+input,
+textarea,
+label, /* 라벨도 추가하면 좋습니다 */
+.theme-switch,
+.interactive {
+    cursor: none !important; /* !important를 붙여서 강제로 숨깁니다 */
+}
 
 /* --- 1. 테마 변수 정의 (핵심!) --- */
 
@@ -76,6 +85,8 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     transition: background 0.5s ease, color 0.5s ease; /* 테마 전환 부드럽게 */
+    /*cursor: url('image/cursor.png'), auto;*/
+    cursor: none;
 }
 h1, h2, h3, h4, .logo { font-family: 'Orbitron', sans-serif; }
 .container { width: 90%; max-width: 1100px; margin: 0 auto; }
@@ -150,6 +161,28 @@ img { max-width: 100%; height: auto; display: block; }
     color: var(--text-secondary);
 }
 
+#cursor {
+    position: fixed; /* 화면에 고정 */
+    top: 0;
+    left: 0;
+    width: 32px; /* 커서 이미지 크기 */
+    height: 32px;
+    z-index: 9999; /* 모든 것보다 위에 있어야 함 */
+    
+    /* 가져온 이미지 넣기 */
+    background-image: url('image/cursor.png'); 
+    background-size: cover;
+    
+    /* 마우스 클릭 통과시키기 (필수!!) */
+    pointer-events: none; 
+    
+    /* 중앙 정렬을 위해 변환 (JS와 맞추기 위함) */
+    transform: translate(-50%, -50%);
+    
+    /* 부드러운 움직임을 위한 설정 */
+    transition: transform 0.1s ease; /* 커질 때 부드럽게 */
+}
+
 .cta-group {
     display: flex;
     justify-content: center;
@@ -165,7 +198,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .card-visual-container { margin-bottom: 1.5rem; }
 .texture-comparison { display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem;}
-.texture-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid transparent; }
+.texture-img { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid transparent; }
 .texture-img.good { border-color: var(--accent-color); }
 .texture-img.bad { border-color: #555; opacity: 0.6; }
 
@@ -212,3 +245,90 @@ input:checked + .slider:before { transform: translateX(24px); }
     .split-layout { flex-direction: column; }
 }
 footer { padding: 2rem 0; text-align: center; font-size: 0.8rem; opacity: 0.7; margin-top: 3rem;}
+
+/* style.css 맨 마지막에 추가 */
+
+/* --- 계급 카드 호버 효과 강화 --- */
+
+/* 젤리(최고위): 붉은색 형광빛 (영원자의 심장 색) */
+.rank-card.jelly:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 25px rgba(255, 60, 60, 0.5), inset 0 0 15px rgba(255, 60, 60, 0.2);
+    transform: translateY(-15px) scale(1.02); /* 더 높이 뜨고 살짝 커짐 */
+}
+
+/* 푸딩(중간): 청록색 신비로운 빛 (해저 도시 색) */
+.rank-card.pudding:hover {
+    border-color: #00a8cc;
+    box-shadow: 0 0 25px rgba(0, 168, 204, 0.5), inset 0 0 15px rgba(0, 168, 204, 0.2);
+    transform: translateY(-12px) scale(1.01);
+}
+
+/* 캔디(신입): 약한 흰색 빛 (아직 불투명함) */
+.rank-card.candy:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* 다크모드일 때 빛이 더 강하게 나도록 조정 */
+[data-theme="dark"] .rank-card.jelly:hover { box-shadow: 0 0 40px rgba(255, 60, 60, 0.7); }
+[data-theme="dark"] .rank-card.pudding:hover { box-shadow: 0 0 40px rgba(0, 168, 204, 0.7); }
+
+/* --- style.css 맨 아래에 추가하세요 --- */
+
+/* 질감 비교 이미지 컨테이너 "초강력" 정렬 수정 */
+#doctrine .card .texture-comparison {
+    display: flex !important;        /* 무조건 플렉스 박스 모델 사용 */
+    flex-direction: row !important;  /* 무조건 가로 방향으로 배치 */
+    justify-content: center !important; /* 중앙 정렬 */
+    align-items: center !important;     /* 수직 중앙 정렬 */
+    gap: 2rem !important;            /* 이미지 사이 간격 */
+    margin-bottom: 1.5rem !important; /* 텍스트와의 간격 */
+    width: 100% !important;          /* 컨테이너 너비 꽉 채우기 */
+}
+
+/* 이미지 자체의 스타일도 확실하게 고정 */
+#doctrine .card .texture-comparison img {
+    display: block !important;       /* 블록 요소로 변경 */
+    margin: 0 !important;            /* 불필요한 마진 제거 */
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 카드가 4개라 조금 더 좁게 설정 */
+    gap: 1.5rem;
+}
+
+.event-card h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.hashtag {
+    display: block;
+    margin-top: 1rem;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    font-weight: 700;
+    opacity: 0.8;
+}
+
+/* 이벤트 카드 안의 이미지 컨테이너 */
+.event-card .card-visual-container {
+    margin: -2.5rem -2.5rem 1.5rem -2.5rem; /* 카드의 패딩을 무시하고 꽉 차게 만듦 */
+}
+
+/* 이벤트 카드 안의 이미지 자체 */
+.event-card .card-img {
+    width: 100%;
+    height: 200px; /* 이미지 높이 고정 (통일감을 위해) */
+    object-fit: cover; /* 비율 유지하며 꽉 채우기 */
+    border-radius: 20px 20px 0 0; /* 위쪽 모서리만 둥글게 */
+}
+
+/* 카드 자체 패딩 조정 (이미지 때문에 상단 패딩 줄임) */
+.event-card.glass-panel {
+    padding-top: 0; /* 상단 패딩 제거 */
+    overflow: hidden; /* 이미지가 둥근 모서리 밖으로 나가는 것 방지 */
+}
